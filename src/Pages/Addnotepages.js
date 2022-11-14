@@ -1,15 +1,14 @@
 import React from 'react';
-import { addNote } from '../utils/local-data';
+import { addNote } from '../utils/Network-data';
 import Noteadd from '../Components/Noteadd';
 import { useNavigate } from 'react-router-dom';
 
 function  Tambahnote () {
     const navigate = useNavigate();
 
-    function onAddNoteHandler(title,body){
-        addNote(title,body)
+    async function onAddNoteHandler(title,body){
+        await addNote(title,body)
         navigate('/');
-        console.log(addNote)
     }
 
         return(

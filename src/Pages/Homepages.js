@@ -1,6 +1,7 @@
 import React from 'react';
 import Notelist from '../Components/NoteList';
-import { getActiveNotes } from '../utils/local-data';
+import { getActiveNotes } from '../utils/Network-data';
+
 
 class HomePage extends React.Component{
   constructor(props){
@@ -8,6 +9,16 @@ class HomePage extends React.Component{
     this.state={
       notes : getActiveNotes(),
     }
+  }
+
+  async componentDidMount() {
+    const { data } = await getActiveNotes();
+    
+    this.setState(() => {
+      return {
+        notes: data
+      }
+    })
   }
 
   render(){

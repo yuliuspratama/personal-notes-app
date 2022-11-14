@@ -3,24 +3,24 @@ import PropTypes from 'prop-types';
 import DeleteButton from "./DeleteButton"
 import Archivebutton from "./Archivebutton"
 import Unarchivebutton from './UnArchivebutton';
-import { deleteNote , archiveNote,unarchiveNote } from '../utils/local-data';
+import { deleteNote , archiveNote,unarchiveNote } from '../utils/Network-data';
 import { useNavigate } from 'react-router-dom';
 
 function NoteDetail({ id ,title, body, createdAt ,archived }) {
   const navigate = useNavigate();
   
-  function Hapus(id) {
-   deleteNote(id)
+  async function Hapus(id) {
+    await deleteNote(id)
    navigate('/');
  }
 
- function ArchivesNote(id){
-    archiveNote(id)
+ async function ArchivesNote(id){
+  await archiveNote(id)
     navigate('/note/archive');
  }
 
- function UnarchivesNote(id){
-    unarchiveNote(id)
+ async function UnarchivesNote(id){
+  await unarchiveNote(id)
     navigate('/');
  }
  

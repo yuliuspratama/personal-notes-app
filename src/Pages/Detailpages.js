@@ -1,21 +1,32 @@
 import React from 'react';
 import NoteDetail from '../Components/Notedetails';
-import { getNote } from '../utils/local-data';
+import { getNote } from '../utils/Network-data';
 import { useParams } from 'react-router-dom';
 import PropTypes from 'prop-types'; 
 
 function DetailPageWrapper() {
     const { id } = useParams();
+    console.log(id)
     return <DetailPage id={String(id)} />;
   }
 
-class DetailPage extends React.Component {
+class DetailPage  extends React.Component  {
   constructor(props) {
     super(props);
-
+    console.log(props)
     this.state = {
-      note: getNote(props.id)
+      note: ""
     };
+    
+  }
+
+  async componentDidMount() {
+    const { data } = await getNote(this.props.id);
+    this.setState(() => {
+      return {
+        note: data
+      }
+    })
   }
 
   render() {
